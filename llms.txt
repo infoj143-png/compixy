@@ -1,0 +1,28 @@
+# Compixy
+
+> Compixy is a free, browser-based tool for resizing, compressing, and converting images between PNG, JPG, and WebP formats. All processing happens locally in the user's browser — no files are ever uploaded to a server, making it a private option for handling personal or sensitive images.
+
+## What it does
+- Resize images to custom dimensions or one-click presets (512x512, 256x256, 128x128 app icon sizes; 1920x1080 HD)
+- Convert between PNG, JPG/JPEG, and WebP formats
+- Compress images with an adjustable quality slider (10-100%)
+- Preserve aspect ratio automatically to prevent image distortion
+- Respect EXIF orientation metadata from phone cameras
+
+## Who it's for
+- App and web developers needing app icon sizes (512x512, 256x256, 128x128)
+- E-commerce sellers resizing product photos
+- Website owners compressing images for faster page load
+- Anyone needing to convert PNG screenshots to smaller WebP files, or shrink photos for WhatsApp/email
+
+## Key facts
+- 100% free, no signup or account required
+- No watermarks added to output images
+- No server upload — all image processing happens client-side via the browser's Canvas API
+- Supports PNG, JPG, JPEG, and WebP input and output formats
+
+## Pages
+- Homepage / tool: https://compixy.vercel.app/ — the resizer, compressor, and format converter tool with FAQ
+
+## Contact
+For questions about Compixy, visit https://compixy.vercel.app/
