@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compixy — Free Online Image Resizer & Compressor</title>
-    <meta name="description" content="Compixy is a fast, free online image utility tool to resize, compress, and optimize PNG, JPG, and WebP images with custom width and height controls.">
+    <title>Compixy — Free Online Image Resizer, Compressor & Format Converter</title>
+    <meta name="description" content="Compixy is a fast, free online tool to resize, compress, and convert PNG, JPG, and WebP images directly in your browser.">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Header -->
+    <!-- Header (Clean without Pro Resizer badge) -->
     <header class="bg-white border-b border-gray-200 shadow-sm">
         <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
@@ -18,7 +18,7 @@
                 <span class="text-xl font-extrabold text-gray-900 tracking-tight">Compixy</span>
             </div>
             <nav class="text-sm text-gray-600 font-medium">
-                <span class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold">Pro Resizer</span>
+                <a href="#" class="text-indigo-600 hover:underline font-semibold">Home</a>
             </nav>
         </div>
     </header>
@@ -27,8 +27,8 @@
     <main class="max-w-3xl mx-auto px-4 py-10 flex-grow w-full">
         
         <div class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Online Image Resizer & Compressor</h1>
-            <p class="text-gray-600 max-w-xl mx-auto text-sm sm:text-base">Set custom width and height or pick popular app icon sizes, compress instantly in your browser.</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Online Image Resizer & Format Converter</h1>
+            <p class="text-gray-600 max-w-xl mx-auto text-sm sm:text-base">Resize dimensions, convert formats (PNG, JPG, WebP), and compress images instantly in your browser.</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8">
@@ -40,7 +40,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                 </svg>
                 <p class="text-gray-700 font-medium mb-1">Drag & drop your image here, or <span class="text-indigo-600 underline">browse files</span></p>
-                <p class="text-xs text-gray-400">Supports PNG, JPG, WebP</p>
+                <p class="text-xs text-gray-400">Supports PNG, JPG, JPEG, WebP</p>
             </div>
 
             <!-- Editor Section (Hidden initially) -->
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <!-- Two Independent Boxes: Width and Height -->
+                <!-- Width and Height Boxes -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Width (px)</label>
@@ -75,6 +75,17 @@
                         <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Height (px)</label>
                         <input type="number" id="height-input" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="Height">
                     </div>
+                </div>
+
+                <!-- Format Converter Option (PNG to JPG, JPG to PNG, WebP, etc.) -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Convert Format (PNG, JPG, WebP)</label>
+                    <select id="format-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                        <option value="keep">Keep Original Format</option>
+                        <option value="image/jpeg">Convert to JPG / JPEG</option>
+                        <option value="image/png">Convert to PNG</option>
+                        <option value="image/webp">Convert to WebP</option>
+                    </select>
                 </div>
 
                 <!-- Quality Slider -->
@@ -106,7 +117,7 @@
         <section class="mt-12 bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-4">
             <h2 class="text-xl font-bold text-gray-900">About Compixy Image Toolkit</h2>
             <p class="text-gray-600 text-sm leading-relaxed">
-                Compixy provides precise width and height controls to customize your graphics. Whether you need standard app icons or custom dimensions, everything runs locally in your browser for absolute speed and security.
+                Compixy allows you to seamlessly resize images, change formats between PNG, JPG, and WebP, and compress file sizes instantly in your browser with 100% security and privacy.
             </p>
         </section>
 
@@ -114,7 +125,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500">
-        <p>&copy; 2026 Compixy. All rights reserved.</p>
+        <p>&copy; 2026 Compixy. All rights reserved. 100% Free Browser Utilities.</p>
     </footer>
 
     <!-- Script Logic -->
@@ -129,6 +140,7 @@
         const origDimensions = document.getElementById('orig-dimensions');
         const widthInput = document.getElementById('width-input');
         const heightInput = document.getElementById('height-input');
+        const formatSelect = document.getElementById('format-select');
         const qualityInput = document.getElementById('quality-input');
         const qualityVal = document.getElementById('quality-val');
         const processBtn = document.getElementById('process-btn');
@@ -195,12 +207,18 @@
             ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
 
             let quality = parseInt(qualityInput.value) / 100;
-            let mimeType = currentFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
+            let chosenFormat = formatSelect.value;
+            let mimeType = chosenFormat === 'keep' ? currentFile.type : chosenFormat;
+            
+            let ext = 'jpg';
+            if (mimeType === 'image/png') ext = 'png';
+            else if (mimeType === 'image/webp') ext = 'webp';
 
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 downloadBtn.href = url;
-                downloadBtn.download = `compixy-${targetWidth}x${targetHeight}-${currentFile.name}`;
+                let baseName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || 'image';
+                downloadBtn.download = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
                 document.getElementById('new-size').textContent = `${(blob.size / 1024).toFixed(1)} KB`;
 
                 editorSection.classList.add('hidden');
@@ -216,5 +234,5 @@
         });
     </script>
 </body>
-        </html>
-    
+                    </html>
+                    
